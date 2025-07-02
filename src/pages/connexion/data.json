@@ -1,32 +1,16 @@
 [
     {
-        "id":1,
-        "nom":"HIRWA",
-        "prenom":"JEAN",
-        "Formation":"Developpement Web",
-        "date_de_debut":"30/06/2025",
-        "date_de_fin":"03/09/2025",
+        "id":"",
+        "nom":"",
+        "prenom":"",
+        "Formation":"",
+        "date_de_debut":"",
+        "date_de_fin":"",
         "presence":[
             {
                 "status":false,
-                "heure_de_depart":"16:13",
-                "heure_d'arrivee":"07:15"
-            }
-        ]
-
-    },
-    {
-        "id":2,
-        "nom":"Masengesho",
-        "prenom":"Patience",
-        "Formation":"Developpement Web",
-        "date_de_debut":"30/06/2025",
-        "date_de_fin":"03/09/2025",
-        "presence":[
-            {
-                "status":false,
-                "heure_de_depart":"16:13",
-                "heure_d'arrivee":"07:15"
+                "heure_de_depart":"",
+                "heure_d'arrivee":""
             }
         ]
 

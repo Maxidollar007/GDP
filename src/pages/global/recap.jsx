@@ -13,7 +13,7 @@ export function Recapitulatif(){
             <th className='border-1'>Date de fin</th>
             <th className='border-1'>Present</th>
             <th className='border-1'>Absent(e)</th>
-            <th className='border-1'>Nombre d'heure effectuées</th>
+            <th className='border-1'><input type="text" className="w-full text-center" placeholder="Inserer votre heure" /></th>
           </tr>
           <tr>
             <td className='border-1'>HIRWA</td>

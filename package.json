@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
+    "fs": "^0.0.1-security",
+    "json-export": "^0.1.5",
     "mysql": "^2.18.1",
+    "os": "^0.1.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
