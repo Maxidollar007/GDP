@@ -6,27 +6,27 @@ import { date, object } from "yup"
 export function Rec(){
 
     const button ="w-fit-content bg-green-600 rounded-2xl text-white flex justify-center py-2 m-auto  hover:cursor-pointer hover:bg-green-900 "
-    let message=""
     const d=new Date()
     const datetime=d.toDateString()
+
+    /* localStorage.setItem("historique",JSON.stringify(data1)) */
     
       const [stagiaires,setStagiaires]=useState([])
+      const [historique,setHistorique]=useState([])
 
      useEffect(()=>{
         const data=localStorage.getItem("data")
-        if(data){
+        const statistique=localStorage.getItem("historique")
+        if(data || statistique){
             setStagiaires(JSON.parse(data))
+            setHistorique(JSON.parse(statistique))
         }
     },[])
 
-// Gerer le checked
-        const [checked,setChecked]=useState(false)
-        const [ischecked,setIschecked]=useState(false)
-        const [count,setCount]=useState(0) 
-        
-       
 
-    const handleCheck=(id,index)=>{
+// Gerer le checked
+// Debut de la fonction handlecheck
+        const handleCheck=(index)=>{
 
 //Initialisation de l'heure
         let heureRef=8
@@ -34,26 +34,38 @@ export function Rec(){
         let hours1=heureRef-d.getHours()
         const hours=d.toLocaleTimeString()
         const olock=hours
+        const date=d.toLocaleDateString()
 
 // Utilisation de la decomposition pour garder des valeurs préexistantes
+            
         const person_global=[...stagiaires]
         person_global[index].presence[0].statut_presence="present"
         person_global[index].presence[0].heure_arrivee=olock
-        
-        /* if(person_global[index].statut_presence=''){
-            alert("absent")
-        } */
         setStagiaires(person_global)
-        console.log(person_global[index]);
+
+//Conversion en tableau de valeurs 
+
+        const conversion =Object.values(person_global[index])
+        localStorage.setItem("data",JSON.stringify(person_global))
+        const presente=person_global[index].presence[0].statut_presence? true:false        
+        
+//Enregistrement des informations dans une variable global Pour l'enregistrement
+        const global={
+            nom:conversion[0],
+            prenom:conversion[1],
+            Date:date,
+            Presence:presente
+        }
+
+
+//Stockage dans le localStorage 
+  
+        const jean=[...historique,global]
+        localStorage.setItem("historique",JSON.stringify(jean))
+        setHistorique(jean)
 
         
-        const conversion =Object.values(person_global[index])
-        console.log(conversion);
         
-        
-        
-        localStorage.setItem("data",JSON.stringify(person_global))
-        /* localStorage.setItem("historique",JSON.stringify(data1)) */
         
 
 //Mettre enregistrements des elements dans le tableau 
@@ -62,15 +74,13 @@ export function Rec(){
         take.push(person_global)
          localStorage.setItem("historique",JSON.stringify(take)) */
 
-        if(hours1<0 || hours1>heureRef){
+      /*   if(hours1<0 || hours1>heureRef){
             message="Retard"
         }else{
             message="A l'heure"
         }
-
-    }
-
-        let search_person=""
+ */
+}
 
 //Marquer Les noms et et prenoms des personnes nombre de personne personne presente et absentes ce jours                  
 
@@ -96,18 +106,11 @@ export function Rec(){
         })
         console.log(f2);
          */
-        
-        
 
        /* console.log(search_person); */
 
        
        
-       
-        
-
-        
-        
 
                 /* const searchperson=stagiaires.filter(person=>person.id)
 
@@ -116,13 +119,8 @@ export function Rec(){
                         console.log(sear)
                     }
         
-                })
-            
+                }) 
          */
-        
-
-    
-    
     return <>
 
 
@@ -140,20 +138,20 @@ export function Rec(){
             <th className='border-1'>Decision</th>
           </tr>
           {stagiaires.map((s,index)=>
-        (<tr className='border-1' key={s.id}>
+        (<tr className='border-1' key={index}>
             <td className='border-1'>{s.nom}</td>
             <td className='border-1'>{s.prenom}</td>
             <td className='border-1'><input 
             type="checkbox" 
             name="checked" 
-            key={s.id}   
-            /* checked={s.presence[0].checked}
-            disabled={s.presence[0].checked } */
-            onClick={(e)=> handleCheck(s.id,index)}
+            key={index}   
+            /* checked={s.presence[0].checked=checked}
+            disabled={s.presence[0].checked=checked } */
+            onClick={()=> handleCheck(index)}
             />
             </td>
             <td className='border-1'>{s.presence.map((p,index)=>(
-                <td key={s.id} className="text-center flex justify-center hover:opacity-50 cursor-not-allowed" >{p.heure_arrivee} {p.statut_presence }
+                <td key={index} className="text-center flex justify-center hover:opacity-50 cursor-not-allowed" >{p.heure_arrivee} {p.statut_presence }
                 
                     </td>
                 ))}</td> 
